@@ -1,0 +1,68 @@
+>> day17 -  22/02/18  
+
+ > 사용자 생성
+  https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/connect-sql-dev182.html#GUID-14217939-3E8F-4782-BFF2-021199A908FD
+
+   참고 사이트 : http://taewan.kim/cloud/oci_user
+
+     user="ADMIN"
+     password="데이터베이스_생성할_때_사용한_암호"
+
+ # 유저 생성 및 권한 부여
+
+  create user user01
+  identified by xxxxxxAt22cc
+  default tablespace data
+  temporary tablespace temp
+  quota 10G on data;
+
+  grant connect, resource
+  to user01;
+
+
+ # SQL Developer를 이용해서 user01 유저로 접속
+
+     user="user01"
+     password="xxxxxxAt22cc"
+
+
+# SQL*Plus로 ATP 접속
+
+  -> Wallet_데이터베이스명.zip 파일 압축 풀기
+
+  -> C:\dev\OracleWallet\Wallet_데이터베이스명 폴더 안에 있는 sqlnet.ora 파일 내용 수정
+
+     WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="C:\dev\OracleWallet\Wallet_데이터베이스명")))
+
+  -> 접속 
+
+     C:\Users\COM> set TNS_ADMIN=C:\dev\OracleWallet\Wallet_데이터베이스명
+     C:\Users\COM> sqlplus user01/xxxxxxAt22cc@edudb_high
+
+ > 예제 파일 넣기
+
+  cmd> sqlplus kingsmile/oracle
+  SQL> set sqlprompt "_USER> "
+  KINGSMILE> @C:\Users\kosta\Desktop\Oracle\Data\sampledata.sql
+
+
+ > DML 명령어 실습 
+  - Table 생성 / 수정 / 삭제 
+  - DML 명령어  - select / insert / update / delete
+
+
+
+------------유용한 site------------------
+http://www.dbguide.net/index.db  <--- dataonair.or.kr 이전
+http://www.sqler.com/pSQL
+http://www.gurubee.net/oracle/sql
+
+https://www.javatpoint.com
+
+===============================
+>> day16 -  22/02/17
+
+  > Oracle Cloud 가입하기
+
+  > sql developer 다운로드 
+
