@@ -1,0 +1,50 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 월요일-2월-15-2016   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table DEPARTMENT
+--------------------------------------------------------
+
+  CREATE TABLE "DEPARTMENT2" 
+   (	"DEPTNO" NUMBER(3,0), 
+	"DNAME" VARCHAR2(25 BYTE), 
+	"PART" NUMBER(3,0), 
+	"BUILD" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+REM INSERTING into DEPARTMENT
+SET DEFINE OFF;
+Insert into DEPARTMENT2 (DEPTNO,DNAME,PART,BUILD) values (101,'컴퓨터공학과',100,'정보관');
+Insert into DEPARTMENT2 (DEPTNO,DNAME,PART,BUILD) values (102,'멀티미디어공학과',100,'멀티미디어관');
+Insert into DEPARTMENT2 (DEPTNO,DNAME,PART,BUILD) values (103,'소프트웨어공학과',100,'소프트웨어관');
+Insert into DEPARTMENT2 (DEPTNO,DNAME,PART,BUILD) values (201,'전자공학과',200,'전자제어관');
+Insert into DEPARTMENT2 (DEPTNO,DNAME,PART,BUILD) values (202,'기계공학과',200,'기계실험관');
+Insert into DEPARTMENT2 (DEPTNO,DNAME,PART,BUILD) values (203,'화학공학과',200,'화학실습관');
+Insert into DEPARTMENT2 (DEPTNO,DNAME,PART,BUILD) values (301,'문헌정보학과',300,'인문관');
+Insert into DEPARTMENT2 (DEPTNO,DNAME,PART,BUILD) values (100,'컴퓨터정보학부',10,null);
+Insert into DEPARTMENT2 (DEPTNO,DNAME,PART,BUILD) values (200,'메카트로닉스학부',10,null);
+Insert into DEPARTMENT2 (DEPTNO,DNAME,PART,BUILD) values (300,'인문사회학부',20,null);
+Insert into DEPARTMENT2 (DEPTNO,DNAME,PART,BUILD) values (10,'공과대학',null,null);
+Insert into DEPARTMENT2 (DEPTNO,DNAME,PART,BUILD) values (20,'인문대학',null,null);
+--------------------------------------------------------
+--  DDL for Index SYS_C007769
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "KINGSMILE"."SYS_C007769" ON "KINGSMILE"."DEPARTMENT" ("DEPTNO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table DEPARTMENT
+--------------------------------------------------------
+
+  ALTER TABLE "KINGSMILE"."DEPARTMENT" ADD PRIMARY KEY ("DEPTNO")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "KINGSMILE"."DEPARTMENT" MODIFY ("DNAME" NOT NULL ENABLE);

@@ -1,0 +1,65 @@
+1. 오라클 설치
+- www.oracle.com 사이트 회원 가입
+- 버전별 다운로드 
+-- 개인 PC에는  Express 버전 사용 (개발자용)
+-- Express 는  11g 64bit 용 제공하지 않음
+2. 오라클 설치시 주의 사항
+-win64_11gR2_database_1of2
+-win64_11gR2_database_2of2
+-- 압축풀기
+-- 2번째 압축 파일 에서 
+   win64_11gR2_database_2of2\database\stage\Components
+   폴더안에 있는 폴더 복사
+   \win64_11gR2_database_1of2\database\stage\Components 
+   안에 붙여넣기
+3. 오라클 설치하기
+-win64_11gR2_database_1of2\database 안에 설치파일 setup
+-
+4. 오라클 DB다룰수 있는 상용 툴
+-토드 소프트웨어 
+-오렌지 
+-SQL Gate  [상용 사용]  
+-- 오라클사에서 제공하는 SQL Developer 무료
+
+5. 설치 정보 확인하기
+--외부 APP 접속 하기 정보 (tnsnames.ora)
+--C:\app\kosta\product
+    \11.2.0
+    \dbhome_1
+    \NETWORK
+    \ADMIN
+[tnsnames.ora]
+ORCL =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orcl)
+    )
+  )
+
+-제어판\시스템 및 보안\관리 도구
+--서비스 
+--시작 파일들 수동으로 변환 가능
+
+6. 오라클 구동(시작) 접속해보기
+--SQLPLUS 사용해서 ...
+
+--SQLGATE 사용해서 접속
+  host , port , 계정 , 비번 , 전역DB(SID)
+  localhost , 1521   , SYSTEM, 1004 , orcl
+
+무료툴 (Oracle)
+--SQL Developer 접속 성공
+
+
+--권한처리 
+--기존 계정 암호 UNLOCK 사용
+  ALTER USER HR
+  IDENTIFIED BY "1004"
+  ACCOUNT UNLOCK;
+--기본쿼리 실행
+
+1일차 완료
+-----------------------------------------------------
+

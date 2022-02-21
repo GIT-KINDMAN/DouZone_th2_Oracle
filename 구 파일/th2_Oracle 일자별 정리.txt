@@ -1,0 +1,167 @@
+>> day19 -  22/02/22  
+
+ > 모델링 & 용어 등등 
+
+ > 집계(집합또는 그룹) 함수
+
+ > 숫자/문자 함수
+
+
+https://dataonair.or.kr/db-tech-reference/d-guide/sql/?pageid=5&mod=document&uid=326
+
+==================================
+>> day18 -  22/02/21  
+
+  > DML 명령어 실습 
+  - Table 생성 / 수정 / 삭제 
+  - DML 명령어  - select / insert / update / delete
+
+ > 제약조건
+
+DML 명령어
+
+select : 검색
+insert : 추가
+delete : 레코드 삭제
+update : 수정
+
+create ____  name
+
+create : 생성 
+alter : 수정
+drop : 구조물까지 다 삭제
+
+desc professor; ---> 특정 테이블 컬럼 정보
+
+<테이블 만들기>
+create table test2
+(
+  no number not null, -- primary key -- number, -- 4bye ( -9999 ~ 9999 )
+  name varchar2(10) not null,
+  birdate date, -- 생년 월일 : '년-월-일' or '년/월/일' '88-12-30' , '88/12/30'
+  age number,
+  constraint no_pk primary key(no)
+);
+
+-primary의 제약조건의 종류-
+중복이 안됨
+primary key는 null 값을 허용하지 않음
+
+-foreign key의 제약 조건 종류-
+
+create table fk_member (
+  code number(2) not null
+  id varchar2(20) not null
+
+  constraint id_fk references member(id)
+  -----------------------------------------
+                  ↑
+(id_fk 가 member(id) 를 참조한다)
+
+- Unique 제약조건 -
+중복안됨
+null 허용함( 만약, not null 지정하면 null 허용 안됨)
+테이블을 만들때 pk와 같은 효과를 주기 위한 제약조건
+한 테이블에 여러 컬럼에 사용 가능함
+
+ - defualt 제약조건 -
+insert into de_test 
+
+
+이름 순으로 정렬 : select * from de_test order by name;  
+주소 순으로 정렬 : select * from de_test order by addr;
+
+desc = 내림차순
+asc = 오름차순
+
+% : 모든, _ : 한문자
+
+select distinct grade from student; -- 중복 제거
+select distinct deptno1 from student;
+
+------------------------insert-------------------------
+insert into 테이블이름 (컬럼명, 컬럼명) values (값, 값);
+
+
+--------------------update----------------------------
+update 테이블이름
+set 컬럼명=변경값, 컬럼명=변경값
+where 조건식
+like : 포함 된것을 찾음
+
+
+ > 테이블 수정/ 삭제 
+
+ > 연산자
+
+
+
+==========================================
+>> day17 -  22/02/18  
+
+ > 사용자 생성
+  https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/connect-sql-dev182.html#GUID-14217939-3E8F-4782-BFF2-021199A908FD
+
+   참고 사이트 : http://taewan.kim/cloud/oci_user
+
+     user="ADMIN"
+     password="데이터베이스_생성할_때_사용한_암호"
+
+ # 유저 생성 및 권한 부여
+
+  create user user01
+  identified by xxxxxxAt22cc
+  default tablespace data
+  temporary tablespace temp
+  quota 10G on data;
+
+  grant connect, resource
+  to user01;
+
+
+ # SQL Developer를 이용해서 user01 유저로 접속
+
+     user="user01"
+     password="xxxxxxAt22cc"
+
+
+# SQL*Plus로 ATP 접속
+
+  -> Wallet_데이터베이스명.zip 파일 압축 풀기
+
+  -> C:\dev\OracleWallet\Wallet_데이터베이스명 폴더 안에 있는 sqlnet.ora 파일 내용 수정
+
+     WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="C:\dev\OracleWallet\Wallet_데이터베이스명")))
+
+  -> 접속 
+
+     C:\Users\COM> set TNS_ADMIN=C:\dev\OracleWallet\Wallet_데이터베이스명
+     C:\Users\COM> sqlplus user01/xxxxxxAt22cc@edudb_high
+
+ > 예제 파일 넣기
+
+  cmd> sqlplus kingsmile/oracle
+  SQL> set sqlprompt "_USER> "
+  KINGSMILE> @C:\Users\kosta\Desktop\Oracle\Data\sampledata.sql
+
+
+ > DML 명령어 실습 
+  - Table 생성 / 수정 / 삭제 
+  - DML 명령어  - select / insert / update / delete
+
+
+
+------------유용한 site------------------
+http://www.dbguide.net/index.db  <--- dataonair.or.kr 이전
+http://www.sqler.com/pSQL
+http://www.gurubee.net/oracle/sql
+
+https://www.javatpoint.com
+
+===============================
+>> day16 -  22/02/17
+
+  > Oracle Cloud 가입하기
+
+  > sql developer 다운로드 
+

@@ -1,0 +1,81 @@
+-- 1. 사원들의 이름, 부서번호, 부서이름을 출력하라.
+SELECT E.ENAME, E.DEPTNO, D.DNAME
+FROM EMP E  join DEPT D
+on E.DEPTNO=D.DEPTNO
+
+-- 2. DALLAS에서 근무하는 사원의 이름, 직위, 부서번호, 부서이름을
+-- 출력하라.
+SELECT E.ENAME, E.JOB, D.DEPTNO, D.DNAME
+FROM EMP E  join DEPT D
+on E.DEPTNO=D.DEPTNO
+WHERE  LOC='DALLAS'
+
+-- 3. 이름에 'A'가 들어가는 사원들의 이름과 부서이름을 출력하라.
+SELECT E.ENAME, D.DNAME
+FROM EMP E inner join DEPT D
+on D.DEPTNO=E.DEPTNO
+WHERE  E.ENAME LIKE '%A%'
+
+-- 4. 사원이름과 그 사원이 속한 부서의 부서명, 그리고 월급을
+--출력하는데 월급이 3000이상인 사원을 출력하라.
+SELECT E.ENAME, D.DNAME, E.SAL
+FROM EMP E inner join DEPT D
+on E.DEPTNO=D.DEPTNO
+where SAL>=3000
+
+-- 5. 직위가 'SALESMAN'인 사원들의 직위와 그 사원이름, 그리고
+-- 그 사원이 속한 부서 이름을 출력하라.
+SELECT E.JOB, E.ENAME, D.DNAME
+FROM EMP E inner join DEPT D
+on E.DEPTNO=D.DEPTNO
+where E.JOB='SALESMAN'
+
+-- 6. 커미션이 책정된 사원들의 사원번호, 이름, 연봉, 연봉+커미션,
+-- 급여등급을 출력하되, 각각의 컬럼명을 '사원번호', '사원이름',
+-- '연봉','실급여', '급여등급'으로 하여 출력하라.
+--(비등가 ) 1 : 1 매핑 대는 컬럼이 없다
+SELECT E.EMPNO AS "사원번호",
+           E.ENAME AS "사원이름",
+	         E.SAL*12 AS "연봉",
+           E.SAL*12+COMM AS "실급여", --E.SAL*12+NVL(COMM,0) AS "실급여",
+	         S.GRADE AS "급여등급"
+FROM EMP E inner join SALGRADE S
+on E.SAL BETWEEN S.LOSAL AND S.HISAL
+where COMM IS NOT NULL
+
+-- 7. 부서번호가 10번인 사원들의 부서번호, 부서이름, 사원이름,
+-- 월급, 급여등급을 출력하라.
+SELECT E.DEPTNO, D.DNAME, E.ENAME, E.SAL, S.GRADE
+FROM EMP E inner join DEPT D
+on E.DEPTNO=D.DEPTNO
+inner join SALGRADE S
+on E.SAL BETWEEN S.LOSAL AND S.HISAL
+WHERE E.DEPTNO=10
+
+SELECT * FROM SALGRADE;
+
+
+-- 8. 부서번호가 10번, 20번인 사원들의 부서번호, 부서이름,
+-- 사원이름, 월급, 급여등급을 출력하라. 그리고 그 출력된
+-- 결과물을 부서번호가 낮은 순으로, 월급이 높은 순으로
+-- 정렬하라.
+SELECT E.DEPTNO, D.DNAME, E.ENAME, E.SAL, S.GRADE
+FROM EMP E inner join DEPT D
+on E.DEPTNO=D.DEPTNO
+inner join SALGRADE S
+on E.SAL BETWEEN S.LOSAL AND S.HISAL
+WHERE  E.DEPTNO<=20 --WHERE E.DEPTNO IN (10,20)
+ORDER BY E.DEPTNO ASC,  E.SAL DESC
+
+
+
+-- 9. 사원번호와 사원이름, 그리고 그 사원을 관리하는 관리자의
+-- 사원번호와 사원이름을 출력하되 각각의 컬럼명을 '사원번호',
+-- '사원이름', '관리자번호', '관리자이름'으로 하여 출력하라.
+--SELF JOIN (자기 자신테이블의 컬럼을 참조 하는 경우)
+
+SELECT E.EMPNO, E.ENAME , M.EMPNO, M.ENAME
+FROM EMP E  left outer JOIN EMP M
+ON e.MGR = m.EMPNO
+
+SELECT * FROM EMP;
