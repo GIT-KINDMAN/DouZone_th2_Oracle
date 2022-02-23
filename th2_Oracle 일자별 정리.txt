@@ -1,3 +1,168 @@
+>> day20 -  22/02/23 
+
+  - 날짜함수 
+  - 형변환 함수.....
+
+ > JOIN
+ > 테이블 / 레코드 복사
+ > 테이블 합치기 - UNION / UNION ALL
+
+
+
+<4번째 과제 :  >
+ >> 통합 과제 - 정규 표현식 & 예시 5개 (이메일, 전화번호, 주민번호, 우편번호, URL, IP 주소, HTML 태그,...)  
+
+
+
+
+--------------------------------------------------------------
+>> 팀(조)별 과제  - 매주 화요일 PM 2시:10 ~ 
+ <3번째 과제 : DataBase >
+ >> 통합 과제 - 데이터베이스 종류(ORDBMS,NoSQL) 및 장단점 ,
+	        DML(select, insert, update, delete), DCL, DDL 명령어 형식 
+	        주요 용어 조사  
+     1팀 : 이동훈 - 
+     2팀 : 
+     3팀 : 이희원 -
+     4팀 : 이상윤 -  
+     5팀 : 엄태문 - 
+     6팀 : 오윤성 - 
+
+     발표팀 :
+     발표자 : 
+
+=========================================
+>> day19 -  22/02/22  
+
+ > 모델링 & 용어 등등  - 무료툴 : ERWin , StartUML,....
+
+ - 그룹(집합)함수
+ - 숫자함수 : ppt 2장 73페이지~
+ - 문자함수 : ppt 2장 4페이지~
+ - 날짜함수 
+ - 형변환 함수.....
+ 
+ 참고 사이트 :  http://www.gurubee.net/lecture/1028
+
+- 비교 연산자와 ANY
+
+SUBSELECT의 결과 세트 목록 중에서 최소한 하나라도 만족하는 것을 의미합니다.
+경우에 따라서 최소값이 될 수도, 최대값이 될 수도 있습니다.
+다음의 용례를 잘 살펴 보세요. 비교 연산자와 ANY가 함께 사용될 때 ANY가 최소값일 수도 최대값일 수도 있습니다. 
+ANY가 '어떠한'이라는 뜻이니까, 최소한 하나의 조건은 만족해야 합니다.
+어떠한 값보다 크다는 것이 하나라도 만족하려면 '어떠한'이 '최소값'이 되어야겠죠.
+반면 어떠한 값보다 작다는 것이 하나라도 만족하려면 '어떠한'이 '최대값'이 되어야 합니다.
+
+> ANY : 최소값 보다 크면
+ 필드명(pay) >= ANY : 최소값보다 크거나 같으면   any( 300, 550, 400 )
+  < ANY : 최대값보다 작으면
+  <= ANY : 최대값보다 작거나 같으면
+   = ANY : IN과 같은 효과
+  != ANY : NOT IN과 같은 효과
+
+
+비교 연산자와 ALL
+
+ANY와는 반대되는 개념입니다.
+
+  필드명(pay) > ALL : 최대값 보다 크면  all( 300, 550, 400 )
+>= ALL : 최대값보다 크거나 같으면
+< ALL : 최소값보다 작으면
+<= ALL : 최소값보다 작거나 같으면
+= ALL : SUBSELECT의 결과가 1건이면 상관없지만 여러 건이면 오류가 발생합니다.
+!= ALL : 위와 마찬가지로 SUBSELECT의 결과가 여러 건이면 오류가 발생합니다
+
+
+https://dataonair.or.kr/db-tech-reference/d-guide/sql/?pageid=5&mod=document&uid=326
+
+==================================
+>> day18 -  22/02/21  
+
+  > DML 명령어 실습 
+  - Table 생성 / 수정 / 삭제 
+  - DML 명령어  - select / insert / update / delete
+
+ > 제약조건
+
+DML 명령어
+
+select : 검색
+insert : 추가
+delete : 레코드 삭제
+update : 수정
+
+create ____  name
+
+create : 생성 
+alter : 수정
+drop : 구조물까지 다 삭제
+
+desc professor; ---> 특정 테이블 컬럼 정보
+
+<테이블 만들기>
+create table test2
+(
+  no number not null, -- primary key -- number, -- 4bye ( -9999 ~ 9999 )
+  name varchar2(10) not null,
+  birdate date, -- 생년 월일 : '년-월-일' or '년/월/일' '88-12-30' , '88/12/30'
+  age number,
+  constraint no_pk primary key(no)
+);
+
+-primary의 제약조건의 종류-
+중복이 안됨
+primary key는 null 값을 허용하지 않음
+
+-foreign key의 제약 조건 종류-
+
+create table fk_member (
+  code number(2) not null
+  id varchar2(20) not null
+
+  constraint id_fk references member(id)
+  -----------------------------------------
+                  ↑
+(id_fk 가 member(id) 를 참조한다)
+
+- Unique 제약조건 -
+중복안됨
+null 허용함( 만약, not null 지정하면 null 허용 안됨)
+테이블을 만들때 pk와 같은 효과를 주기 위한 제약조건
+한 테이블에 여러 컬럼에 사용 가능함
+
+ - defualt 제약조건 -
+insert into de_test 
+
+
+이름 순으로 정렬 : select * from de_test order by name;  
+주소 순으로 정렬 : select * from de_test order by addr;
+
+desc = 내림차순
+asc = 오름차순
+
+% : 모든, _ : 한문자
+
+select distinct grade from student; -- 중복 제거
+select distinct deptno1 from student;
+
+------------------------insert-------------------------
+insert into 테이블이름 (컬럼명, 컬럼명) values (값, 값);
+
+
+--------------------update----------------------------
+update 테이블이름
+set 컬럼명=변경값, 컬럼명=변경값
+where 조건식
+like : 포함 된것을 찾음
+
+
+ > 테이블 수정/ 삭제 
+
+ > 연산자
+
+
+
+==========================================
 >> day17 -  22/02/18  
 
  > 사용자 생성
